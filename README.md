@@ -1,14 +1,10 @@
 # time_to_insulin
-Does time to insulin for a meal change the time not in range after meal or does it matter if i take the insulin before or after meal?
+**Does it matter if i take insulin before or after meal?**
 
-
-Having type 1 diabetes (https://en.wikipedia.org/wiki/Type_1_diabetes), you want to maximize the time in range TIR (https://diabetes.org/about-diabetes/devices-technology/cgm-time-in-range in my case blood glucose levels between 4-10).
+Having type 1 diabetes (https://en.wikipedia.org/wiki/Type_1_diabetes), you want to maximize the time in range TIR (https://diabetes.org/about-diabetes/devices-technology/cgm-time-in-range). Which in my case is blood glucose levels between 4-10.
 When eating, you need to take insulin in order to minmize the increase of blood glucose, not doing so will push the blood glucose to not in range (NIR).
-It is said that the insulin should be taken before meal, in order to test weither it matter or not I had the same meal 26 times and tried to take the insulin both before and after meal.
 
-
-the meal has the following Nutrional content:
-
+The meal had the following nutrional content:
 
 | Type  | Amount |
 | ------------- | ------------- |
@@ -20,16 +16,11 @@ the meal has the following Nutrional content:
 | Salt |2.7g |
 
 
-The insulinshot i took was 9 of Novorapid (https://www.ema.europa.eu/en/medicines/human/EPAR/novorapid).
-I have a BMI<=20
-This was my last meal of the day, minmizing the risk of moving around too much after meal and isolating just the effect of the insulin after meal.
+The insulin dose I took was 9 of Novorapid (https://www.ema.europa.eu/en/medicines/human/EPAR/novorapid).
+This was my last meal of the day, minmizing the risk of moving around too much after meal and isolating just the effect of the insulin before/after meal.
 
-
-
-Insulin was taken for different times before and after food, the different times tested for insulin was [-60,-45,-30,-25,-20,-15,0,15,20,25,30,45,60] where -60 means 60 minutes before food and 60 means 60 minutes after food.
-Since all time where tested 2 times, there are total 26 rows of data.
-
-The two different datasets:
+Insulin was taken for different times before and after the meal, the different times tested for insulin was [-60,-45,-30,-25,-20,-15,0,15,20,25,30,45,60] where "-60" means 60 minutes before meal and "60" means 60 minutes after meal.
+Since all times where tested 2 times, there are total 26 measurements collected into two different datasets:
 
 blood_glucose_after_food:
 
@@ -41,10 +32,13 @@ blood_glucose_after_food:
 | tti_group | 0 if tti=0, 1 if tti<0 and 2 if tti>0 |
 
 
-The blood glucose was collected from a CGM that has 10 minutes delay so all values where transformed into the correct time and a linear interpolation was done in order to have values for each minute.
+The blood glucose was collected from a CGM that has 10 minutes delay so all values where transformed into the correct time and a linear interpolation was done in order to have values for each minute. The blood glucose level was collected from the meal up until 8h after meal.
+
+The data can be seen in this plot:
+![Screenshot](blood_glucose_after_food.png)
 
 
-time_to_insulin_analysis:
+time_to_insulin_data:
 
 | Name  | desc |
 | ------------- | ------------- |
@@ -54,6 +48,6 @@ time_to_insulin_analysis:
 | time_NIR |time spent in NIR after meal |
 | blood_glucose_tom | blood glucose at time of meal |
 
-It is the average of the two measurements done on each tti.
+This data is the average of the two measurements done on each tti.
 
-![Screenshot](blood_glucose_after_food.png)
+A simple analysis is done in the .ipynb file.
